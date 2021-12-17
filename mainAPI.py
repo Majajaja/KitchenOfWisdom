@@ -1,4 +1,4 @@
-
+import configparser
 from flask import Flask, app, request, jsonify, make_response
 from flask_sqlalchemy import SQLAlchemy
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
@@ -8,6 +8,11 @@ from sqlalchemy.ext.declarative.api import declarative_base
 from pymysql import *
 from sqlalchemy.dialects.mysql import *
 
+# Load config file
+config = configparser.ConfigParser()
+config.read('config.ini')
+print(config['mysql'])
+
 # Init app
 app = Flask(__name__)
 
@@ -16,6 +21,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@localhost/KitchenOfWisdom'
 
 # Init db
 db = SQLAlchemy(app)
+
+ 
 
 class TypeIngredient(db.Model):
   __tablename__ = 'ttypeingredient'
