@@ -7,7 +7,7 @@ from sqlalchemy import *
 from sqlalchemy.ext.declarative.api import declarative_base
 from pymysql import *
 from sqlalchemy.dialects.mysql import *
-from dbClasses import TypeIngredient
+from models.typeingredient import TypeIngredient
 
 # Load config file
 config = configparser.ConfigParser()
