@@ -7,27 +7,27 @@ from sqlalchemy import *
 from sqlalchemy.ext.declarative.api import declarative_base
 from pymysql import *
 from sqlalchemy.dialects.mysql import *
+from dbClasses import TypeIngredient
 
 # Load config file
 config = configparser.ConfigParser()
 config.read('config.ini')
-print(config['mysql'])
+
+# Init config var
+dbURI = 'mysql://'+ config['mysql']['user'] + config['mysql']['password']+ '@' + config['mysql']['host'] + '/' + config['mysql']['db']
 
 # Init app
 app = Flask(__name__)
 
 # Database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@localhost/KitchenOfWisdom'
+app.config['SQLALCHEMY_DATABASE_URI'] = dbURI
 
 # Init db
 db = SQLAlchemy(app)
 
- 
 
-class TypeIngredient(db.Model):
-  __tablename__ = 'ttypeingredient'
-  id = db.Column('id', db.Integer, primary_key=True)
-  nom = db.Column('TYPI_Nom', db.String, nullable=False)
+
+
 
 @app.route('/')
 def index():
